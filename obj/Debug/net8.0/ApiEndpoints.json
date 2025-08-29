@@ -32,6 +32,69 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "TaskApi.Controllers.TasksControllers",
+    "Method": "GetTasks",
+    "RelativePath": "api/TasksControllers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskApi.Controllers.TasksControllers",
+    "Method": "CreateTask",
+    "RelativePath": "api/TasksControllers",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "task",
+        "Type": "TaskApi.Models.Task",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskApi.Controllers.TasksControllers",
+    "Method": "UpdateTask",
+    "RelativePath": "api/TasksControllers/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedTask",
+        "Type": "TaskApi.Models.Task",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskApi.Controllers.TasksControllers",
+    "Method": "DeleteTask",
+    "RelativePath": "api/TasksControllers/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TaskApi.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",
