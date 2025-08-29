@@ -1,5 +1,8 @@
-using Microsoft.EntityFrameworkCore;
 using TaskApi.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +32,22 @@ builder.Services.AddCors(options =>
         });
 });
 
+// Adiciona o serviço de autenticação com JWT.
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+
 var app = builder.Build();
 
 // Configura o pipeline de requisições HTTP.
@@ -47,6 +66,7 @@ app.UseHttpsRedirection();
 app.UseCors();
 
 // Habilita a autenticação e autorização na aplicação.
+app.UseAuthorization();
 app.UseAuthorization();
 
 // Mapeia os controladores da API para as rotas.
