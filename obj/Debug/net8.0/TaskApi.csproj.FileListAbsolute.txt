@@ -148,3 +148,4 @@ C:\temp\TaskApi\TaskApi\TaskApi\obj\Debug\net8.0\refint\TaskApi.dll
 C:\temp\TaskApi\TaskApi\TaskApi\obj\Debug\net8.0\TaskApi.pdb
 C:\temp\TaskApi\TaskApi\TaskApi\obj\Debug\net8.0\TaskApi.genruntimeconfig.cache
 C:\temp\TaskApi\TaskApi\TaskApi\obj\Debug\net8.0\ref\TaskApi.dll
+C:\temp\TaskApi\TaskApi\TaskApi\obj\Debug\net8.0\TaskApi.sourcelink.json

@@ -22,7 +22,7 @@ namespace TaskApi.Controllers
         private readonly IConfiguration _configuration;
 
         // O construtor injeta o DbContext, permitindo a comunicação com o banco de dados.
-        public AuthController(ApplicationDbContext context)
+        public AuthController(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;
@@ -30,17 +30,22 @@ namespace TaskApi.Controllers
 
         // Endpoint de registro. Responde a requisições POST para a URL: /api/Auth/register
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] User user)
+        public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             // Verifica se um usuário com o mesmo nome já existe.
-            if (_context.Users.Any(u => u.Username == user.Username))
+            if (_context.Users.Any(u => u.Username == model.Username))
             {
                 // Se já existe, retorna um erro.
                 return BadRequest("Usuário já existe.");
             }
 
-            // Gera o hash da senha usando BCrypt, que é mais seguro do que a senha em texto puro.
-            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+            // Cria um novo usuário e armazena a senha como hash
+            var user = new User
+            {
+                Username = model.Username,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password),
+                Role = "User"
+            };
 
             // Adiciona o novo usuário ao contexto de banco de dados.
             _context.Users.Add(user);
@@ -85,5 +90,4 @@ namespace TaskApi.Controllers
             return Ok(new { Token = tokenString });
         }
     }
-}
 }
